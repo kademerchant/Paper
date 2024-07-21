@@ -2,3 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+.font-quest {
+    font-family: "Major Mono Display", monospace;
+    font-weight: 200;
+    font-style: normal;
+  }
+
