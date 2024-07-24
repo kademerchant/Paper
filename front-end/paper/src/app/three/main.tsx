@@ -1,7 +1,11 @@
 import React, { useEffect, useRef } from "react";
 import * as THREE from "three";
-import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+
+interface Pyramid {
+  mesh: THREE.Mesh;
+  rotationSpeedForPyramids: { x: number; y: number };
+}
 
 const ThreeScene: React.FC = () => {
   const mountRef = useRef<HTMLDivElement>(null);
@@ -21,6 +25,7 @@ const ThreeScene: React.FC = () => {
     camera.position.z = 7;
     camera.rotation.y = 0.7;
     camera.position.y = 7;
+    camera.rotation.x = -0.287514;
 
     const renderer = new THREE.WebGLRenderer();
     renderer.setSize(
@@ -52,7 +57,7 @@ const ThreeScene: React.FC = () => {
     const numOfPyramids = 1500;
     // const numOfCubes = 50;
 
-    const pyramids = [];
+    const pyramids: Pyramid[] = [];
     // const cubes = [];
 
     for (let i = 0; i < numOfPyramids; i++) {
@@ -63,7 +68,12 @@ const ThreeScene: React.FC = () => {
         Math.random() * 300 - 150
       );
       scene.add(newPyramid);
-      pyramids.push(newPyramid);
+
+      const rotationSpeedForPyramids = {
+        x: Math.random() * 0.003 + 0.001,
+        y: Math.random() * 0.002 + 0.001,
+      };
+      pyramids.push({ mesh: newPyramid, rotationSpeedForPyramids });
     }
     let plane: THREE.Object3D | null = null;
     loader.load(
@@ -72,7 +82,7 @@ const ThreeScene: React.FC = () => {
         plane = gltf.scene;
         if (plane) {
           plane.position.set(-4, 0, 0);
-          plane.rotation.y = 180 * (Math.PI / 180)
+          plane.rotation.y = 180 * (Math.PI / 180);
           scene.add(plane);
         }
       },
@@ -82,37 +92,40 @@ const ThreeScene: React.FC = () => {
       }
     );
 
-    let time = 0
+    let time: number = 0;
     const animate = () => {
       requestAnimationFrame(animate);
-      //cube.rotation.x += 0.001;
-      //cube.rotation.y += 0.001;
+
+      pyramids.forEach(({ mesh, rotationSpeedForPyramids }) => {
+        mesh.rotation.x += rotationSpeedForPyramids.x;
+        mesh.rotation.y += rotationSpeedForPyramids.y;
+      });
 
       if (camera.rotation.y >= 0.2 && plane) {
         camera.rotation.y -= 0.00044;
-        camera.rotation.x -= 0.00025;
         camera.position.z += 0.01;
-        plane.position.x += 0.0014
+
+        plane.position.x += 0.0149;
       } else if (camera.rotation.y >= 0.14 && plane) {
         camera.rotation.y -= 0.00044;
-        camera.rotation.x -= 0.000016;
-        camera.position.z += 0.007;
+        camera.position.z += 0.01;
+
         plane.position.x += 0.0149;
       } else if (camera.rotation.y > -1.2 && plane) {
         camera.rotation.y -= 0.00045;
         plane.position.x += 0.0149;
       } else if (camera.rotation.y > -1.4 && plane) {
-        time += 0.0003
-        plane.position.x += 0.024
-        plane.rotation.z -= 0.001
-        plane.position.y += time**2
+        time += 0.0003;
+        plane.position.x += 0.024;
+        plane.rotation.z -= 0.001;
+        plane.position.y += time ** 2;
       }
 
       /*controls.update();*/
       renderer.render(scene, camera);
     };
-
     animate();
+    console.log("Animating...");
 
     const handleResize = () => {
       if (!mountRef.current) return;
