@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from "react";
 import * as THREE from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
+import randomLightHex from "./helpers/HSLtoHEX";
 
 interface icosahedron {
   mesh: THREE.Mesh;
@@ -26,8 +27,9 @@ const ThreeScene: React.FC = () => {
     // Directional lights
     const directionalLight2 = new THREE.DirectionalLight(0xffffff, 3);
     const directionalLight1 = new THREE.DirectionalLight(0xffffff, 3);
-    directionalLight1.position.set(1, 1, 1);
-    directionalLight2.position.set(2, -2, 0);
+    
+    directionalLight1.position.set(2, 1, 1);
+    directionalLight2.position.set(1, -3, 0);
     scene.add(directionalLight1);
     scene.add(directionalLight2);
 
@@ -43,7 +45,7 @@ const ThreeScene: React.FC = () => {
     camera.rotation.x = -0.287514;
 
     // Renderer
-    const renderer = new THREE.WebGLRenderer();
+    const renderer = new THREE.WebGLRenderer({antialias: true });
     renderer.setSize(
       mountRef.current.clientWidth,
       mountRef.current.clientHeight
@@ -61,25 +63,32 @@ const ThreeScene: React.FC = () => {
 
     // Icosahedrons
     let icosahedronGeometry: THREE.IcosahedronGeometry | null = null;
-    const icosahedronMaterial = new THREE.MeshStandardMaterial({
-      color: 0xccccff,
-      roughness: 0.5,
-      metalness: 0.5,
-    });
-    const icosahedron = (icosahedronGeometry: THREE.IcosahedronGeometry) =>
+    let icosahedronMaterial: THREE.Material | null = null;
+    
+    const icosahedron = (icosahedronGeometry: THREE.IcosahedronGeometry, icosahedronMaterial: THREE.Material) =>
       new THREE.Mesh(icosahedronGeometry, icosahedronMaterial);
 
     const numOfIcosahedrons = 3000;
     const icosahedrons: icosahedron[] = [];
     let detail: number = 0;
+    let colour: string = ''
 
     for (let i = 0; i < numOfIcosahedrons; i++) {
-      detail = Math.floor(Math.random()*2);
-      if(detail === 1){
-        detail = 3
+      detail = Math.floor(Math.random() * 2);
+      colour = randomLightHex((Math.floor(Math.random() * 360)), 36, 83)
+      if (detail === 1) {
+        detail = 3;
       }
+      console.log(colour)
+
       icosahedronGeometry = new THREE.IcosahedronGeometry(1, detail);
-      const newIcosahedron = icosahedron(icosahedronGeometry);
+      icosahedronMaterial = new THREE.MeshStandardMaterial({
+        color: colour,
+        roughness: 0.5,
+        metalness: 0.5,
+      });
+
+      const newIcosahedron = icosahedron(icosahedronGeometry, icosahedronMaterial);
       newIcosahedron.position.set(
         Math.random() * 350 - 225,
         Math.random() * 225 - 145,

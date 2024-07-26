@@ -11,7 +11,7 @@ export default function AboutLayout({
   children: React.ReactNode
 }) {
   return (
-    <section className="flex-grow">
+    <section className=" h-full ">
       {children}
     </section>
   )

@@ -22,7 +22,7 @@ export default function RootLayout({
         <link href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&family=Questrial&display=swap" rel="stylesheet"/>
         <link ref="icon" href=""/>
       </Head>
-      <body className="flex flex-col justify-start align-center min-h-screen h-full overflow-hidden">
+      <body className=" bg-[#FEFBEA] flex flex-col justify-start align-center min-h-screen h-full overflow-hidden">
         <Header />
         <main className="flex-grow">{children}</main>
         <Footer />
