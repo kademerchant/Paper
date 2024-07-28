@@ -9,6 +9,7 @@ async function main() {
       email: "kademerchant@gmail.com",
       password: "TESTPASSWORD",
       role: "ADMIN",
+      username: "carbattery3000"
     },
   });
   console.log(user);

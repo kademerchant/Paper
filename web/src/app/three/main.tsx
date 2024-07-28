@@ -60,6 +60,7 @@ const ThreeScene: React.FC = () => {
     controls.dampingFactor = 0.01;
     controls.enableZoom = false;
     controls.rotateSpeed = 0.1;
+    controls.enablePan = false;
 
     // Icosahedrons
     let icosahedronGeometry: THREE.IcosahedronGeometry | null = null;

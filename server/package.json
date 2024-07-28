@@ -4,17 +4,24 @@
   "description": "Back end for the site",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon prisma/scripts.ts"
+    "test": "nodemon prisma/scripts.ts",
+    "dev": "nodemon api/index.ts"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@prisma/client": "^5.17.0",
+    "bcrypt": "^5.1.1",
+    "dotenv": "^16.4.5",
     "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2",
     "nodemon": "^3.1.4",
     "prisma": "^5.17.0"
   },
   "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
+    "@types/cors": "^2.8.17",
+    "@types/jsonwebtoken": "^9.0.6",
     "ts-node": "^10.9.2"
   }
 }
