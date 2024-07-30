@@ -27,7 +27,7 @@ const ThreeScene: React.FC = () => {
     // Directional lights
     const directionalLight2 = new THREE.DirectionalLight(0xffffff, 3);
     const directionalLight1 = new THREE.DirectionalLight(0xffffff, 3);
-    
+
     directionalLight1.position.set(2, 1, 1);
     directionalLight2.position.set(1, -3, 0);
     scene.add(directionalLight1);
@@ -45,7 +45,7 @@ const ThreeScene: React.FC = () => {
     camera.rotation.x = -0.287514;
 
     // Renderer
-    const renderer = new THREE.WebGLRenderer({antialias: true });
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setSize(
       mountRef.current.clientWidth,
       mountRef.current.clientHeight
@@ -65,22 +65,24 @@ const ThreeScene: React.FC = () => {
     // Icosahedrons
     let icosahedronGeometry: THREE.IcosahedronGeometry | null = null;
     let icosahedronMaterial: THREE.Material | null = null;
-    
-    const icosahedron = (icosahedronGeometry: THREE.IcosahedronGeometry, icosahedronMaterial: THREE.Material) =>
-      new THREE.Mesh(icosahedronGeometry, icosahedronMaterial);
 
-    const numOfIcosahedrons = 3000;
+    const icosahedron = (
+      icosahedronGeometry: THREE.IcosahedronGeometry,
+      icosahedronMaterial: THREE.Material
+    ) => new THREE.Mesh(icosahedronGeometry, icosahedronMaterial);
+
+    const numOfIcosahedrons: number = 3000;
     const icosahedrons: icosahedron[] = [];
     let detail: number = 0;
-    let colour: string = ''
+    let colour: string = "";
 
     for (let i = 0; i < numOfIcosahedrons; i++) {
       detail = Math.floor(Math.random() * 2);
-      colour = randomLightHex((Math.floor(Math.random() * 360)), 36, 83)
+      colour = randomLightHex(Math.floor(Math.random() * 360), 36, 83);
       if (detail === 1) {
         detail = 3;
       }
-      console.log(colour)
+      console.log(colour);
 
       icosahedronGeometry = new THREE.IcosahedronGeometry(1, detail);
       icosahedronMaterial = new THREE.MeshStandardMaterial({
@@ -89,7 +91,10 @@ const ThreeScene: React.FC = () => {
         metalness: 0.5,
       });
 
-      const newIcosahedron = icosahedron(icosahedronGeometry, icosahedronMaterial);
+      const newIcosahedron = icosahedron(
+        icosahedronGeometry,
+        icosahedronMaterial
+      );
       newIcosahedron.position.set(
         Math.random() * 350 - 225,
         Math.random() * 225 - 145,

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { RegisterProvider } from "./registerContext";
 
 export const metadata: Metadata = {
   title: "Paper | Register",
@@ -11,8 +12,8 @@ export default function AboutLayout({
   children: React.ReactNode;
 }) {
   return (
-    <section className="w-full h-full mx-auto">
-    {children}
-    </section>
+    <RegisterProvider>
+      <section className="w-full h-full mx-auto">{children}</section>
+    </RegisterProvider>
   );
 }
