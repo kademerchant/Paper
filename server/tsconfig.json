@@ -1,9 +1,13 @@
 {
-    "compilerOptions": {
-        "sourceMap": true,
-        "outDir": "dist",
-        "strict": true,
-        "lib": ["ESNext"],
-        "esModuleInterop": true
+  "compilerOptions": {
+    "sourceMap": true,
+    "outDir": "dist",
+    "strict": true,
+    "lib": ["ESNext"],
+    "esModuleInterop": true,
+    "baseUrl": ".", // Added baseUrl to resolve paths
+    "paths": {
+      "#/*": ["*"] // Added path mapping for '@' to root
     }
+  }
 }

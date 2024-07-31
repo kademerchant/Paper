@@ -1,6 +1,6 @@
-"use client"
-
+"use client";
 import { createContext, useState, useContext, ReactNode } from "react";
+import api from "../../../../axios/axios";
 
 interface RegisterContextProps {
   name: string;
@@ -47,6 +47,10 @@ export const RegisterProvider = ({
     handleSubmit,
   };
 
+  const validateForm = (name:string, email:string, username:string, password:string):boolean => {
+    return true
+  }
+
   return (
     <RegisterContext.Provider value={value}>
       {children}
@@ -54,4 +58,4 @@ export const RegisterProvider = ({
   );
 };
 
-export default RegisterContext
+export default RegisterContext;

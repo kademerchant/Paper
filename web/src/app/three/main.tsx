@@ -71,7 +71,7 @@ const ThreeScene: React.FC = () => {
       icosahedronMaterial: THREE.Material
     ) => new THREE.Mesh(icosahedronGeometry, icosahedronMaterial);
 
-    const numOfIcosahedrons: number = 3000;
+    const numOfIcosahedrons: number = 1500;
     const icosahedrons: icosahedron[] = [];
     let detail: number = 0;
     let colour: string = "";
@@ -135,6 +135,7 @@ const ThreeScene: React.FC = () => {
         mesh.rotation.y += rotationSpeed.y;
       });
 
+      //will come back to this to make the animation more fluid
       rise += 0.000045;
       time += 1;
       if (plane && time < 1500) {
