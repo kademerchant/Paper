@@ -4,7 +4,7 @@
   "description": "Back end for the site",
   "main": "index.js",
   "scripts": {
-    "test": "nodemon -r dotenv/config prisma/scripts.ts",
+    "delete": "nodemon prisma/client.ts",
     "dev": "nodemon api/index.ts"
   },
   "author": "",

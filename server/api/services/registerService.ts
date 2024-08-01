@@ -6,13 +6,12 @@ export const registerUser = async (
   name: string,
   email: string,
   username: string,
+  ciUsername: string,
   password: string,
-  additionalFields: Record<string, string> = {} // Accept additional fields for validation
+  additionalFields: Record<string, string> = {} //modularity for adding new fields if i want to
 ) => {
-  // Define characters to disallow
   const evilCharacters = /[!#$^&*(),<>?":{}]/;
 
-  // Validate email format
   if (!validator.isEmail(email)) {
     throw new Error("Invalid Email format");
   }
@@ -25,7 +24,6 @@ export const registerUser = async (
     }
   }
 
-  // Check for existing username or email
   if (
     (await prisma.user.findUnique({ where: { username } })) !== null ||
     (await prisma.user.findUnique({ where: { email } })) !== null
@@ -33,13 +31,30 @@ export const registerUser = async (
     throw new Error("Username / Email already exists");
   }
 
-  // Create new user
   return await prisma.user.create({
     data: {
       name: validator.escape(name),
       email: validator.escape(email.toLowerCase()),
       username: validator.escape(username),
+      ciUsername: validator.escape(ciUsername),
       password: await bcrypt.hash(password, 10),
     },
   });
+};
+
+export const usernameOrEmailExists = async (
+  username: string,
+  email: string
+): Promise<boolean> => {
+  try {
+    const ciUsername = username.toLowerCase();
+    const usernameExists = await prisma.user.findUnique({
+      where: { ciUsername },
+    });
+    const emailExists = await prisma.user.findUnique({ where: { email } });
+    return !!(usernameExists || emailExists);
+  } catch (err) {
+    console.log(`Error while finding existing username/email in db: ${err}`);
+    return false;
+  }
 };

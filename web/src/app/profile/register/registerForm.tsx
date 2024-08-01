@@ -1,8 +1,9 @@
 "use client";
 import React, { ReactElement, useContext } from "react";
 import RegisterContext from "./registerContext";
+import { handleKeyDown } from "./utils/formHandlers";
 
-export default function RegisterForm():ReactElement {
+export default function RegisterForm(): ReactElement {
   const context = useContext(RegisterContext);
   if (!context) {
     throw new Error(
@@ -19,9 +20,12 @@ export default function RegisterForm():ReactElement {
     setUsername,
     password,
     setPassword,
-    hidden,
-    setHidden,
     handleSubmit,
+    isNameInvalid,
+    isUsernameInvalid,
+    isEmailInvalid,
+    isPasswordInvalid,
+    userExists
   } = context;
 
   return (
@@ -37,11 +41,22 @@ export default function RegisterForm():ReactElement {
           >
             Name
           </label>
+          {isNameInvalid(name) && (
+            <div className="font-quest text-[0.7rem] lg:text-base text-red-400">
+              must provide a valid email ( @gmail.com, @hotmail.com @yahoo.com
+              ...)
+            </div>
+          )}
           <input
-            className="focus:outline-black focus:outline-1.5 focus:outline rounded w-full pl-1 pb-0.5 pt-1 font-quest"
+            className={`focus:outline-black focus:outline-1.5 focus:outline ${
+              isNameInvalid(name)
+                ? "focus:outline-red-400"
+                : "focus:outline-black"
+            }  rounded w-full pl-1 pb-0.5 pt-1 font-quest`}
             type="text"
             placeholder=" name..."
             value={name}
+            required
             onChange={(e) => setName(e.target.value)}
           />
           <label
@@ -50,11 +65,22 @@ export default function RegisterForm():ReactElement {
           >
             Email
           </label>
+          {email.length > 5 && isEmailInvalid(email) && (
+            <div className="font-quest text-[0.7rem] lg:text-base text-red-400">
+              must provide a valid email ( @gmail.com, @hotmail.com @yahoo.com
+              ...)
+            </div>
+          )}
           <input
-            className="focus:outline-black focus:outline-1.5 focus:outline rounded w-full pl-1 pb-0.5 pt-1 font-quest"
+            className={`focus:outline-black focus:outline-1.5 focus:outline ${
+              (email.length > 5 && isEmailInvalid(email)) || userExists
+                ? "focus:outline-red-400"
+                : "focus:outline-black"
+            } rounded w-full pl-1 pb-0.5 pt-1 font-quest`}
             type="text"
             placeholder="example@gmail.com"
             value={email}
+            required
             onChange={(e) => setEmail(e.target.value)}
           />
           <label
@@ -63,16 +89,24 @@ export default function RegisterForm():ReactElement {
           >
             Username
           </label>
-          <div className="font-quest text-[0.7rem] lg:text-base text-red-400">
-            username must only contain letters, numbers and ' _ ', ' - ' <br/> and be 
-            between 8-32 characters long.
-          </div>
+          {isUsernameInvalid(username) && (
+            <div className="font-quest text-[0.7rem] lg:text-base text-red-400">
+              username must only contain letters, numbers and ' _ ', ' - '{" "}
+              <br /> and be between 3 and 32 characters long.
+            </div>
+          )}
           <input
-            className="focus:outline-black focus:outline-1.5 focus:outline rounded w-full pl-1 pb-0.5 pt-1 font-quest"
+            className={`focus:outline-black focus:outline-1.5 focus:outline ${
+              isUsernameInvalid(username) || userExists
+                ? "focus:outline-red-400"
+                : "focus:outline-black"
+            } rounded w-full pl-1 pb-0.5 pt-1 font-quest`}
             type="text"
             placeholder="xAlexanderTheGreatx"
             value={username}
+            required
             onChange={(e) => setUsername(e.target.value)}
+            onKeyDown={(e) => handleKeyDown(e)}
           />
           <label
             className="text-xl font-quest mt-4"
@@ -80,16 +114,32 @@ export default function RegisterForm():ReactElement {
           >
             Password
           </label>
+          {password.length > 0 && isPasswordInvalid(password) && (
+            <div className="font-quest text-[0.7rem] lg:text-base text-red-400">
+              password must include at least one special character e.g "!@#",
+              special character and be at least 8 characters long
+            </div>
+          )}
           <input
-            className="focus:outline-black focus:outline-1.5 focus:outline rounded w-full pl-1 pb-0.5 pt-1 font-quest"
+            className={`focus:outline-black focus:outline-1.5 focus:outline ${
+              password.length > 0 && isPasswordInvalid(password)
+                ? "focus:outline-red-400"
+                : "focus:outline-black"
+            } rounded w-full pl-1 pb-0.5 pt-1 font-quest`}
             type="password"
             placeholder="********"
-            value={hidden}
+            value={password}
+            required
             onChange={(e) => {
               setPassword(e.target.value);
-              setHidden("*".repeat(e.target.value.length));
             }}
+            onKeyDown={(e) => handleKeyDown(e)}
           />
+          {userExists && (
+            <div className="font-quest text-[0.7rem] lg:text-base text-red-400">
+                username or email is already associated with an account
+            </div>
+          )}
           <button
             type="submit"
             className="w-3/5 mt-6 p-2 bg-none outline outline-1 outline-black font-quest text-l rounded"

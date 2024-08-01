@@ -1,6 +1,23 @@
 "use client";
-import { createContext, useState, useContext, ReactNode } from "react";
+import {
+  createContext,
+  useState,
+  ReactNode,
+  FC,
+  FormEvent,
+  KeyboardEvent,
+} from "react";
+import {
+  isNameInvalid,
+  isUsernameInvalid,
+  isEmailInvalid,
+  isPasswordInvalid,
+  isFormInvalid,
+  userAlreadyExists,
+} from "./utils/validate";
+import { handleKeyDown as handleKeyDownUtil } from "./utils/formHandlers"; // Renamed to avoid confusion
 import api from "../../../../axios/axios";
+import { useRouter } from "next/navigation";
 
 interface RegisterContextProps {
   name: string;
@@ -11,26 +28,65 @@ interface RegisterContextProps {
   setUsername: (username: string) => void;
   password: string;
   setPassword: (password: string) => void;
-  hidden: string;
-  setHidden: (hidden: string) => void;
-  handleSubmit: (e: any) => void;
+  userExists: boolean;
+  setUserExists: (userExists: boolean) => void;
+  handleSubmit: (e: FormEvent<HTMLFormElement>) => void;
+  handleKeyDown: (e: KeyboardEvent<HTMLInputElement>) => void;
+  isNameInvalid: (name: string) => boolean;
+  isUsernameInvalid: (username: string) => boolean;
+  isEmailInvalid: (email: string) => boolean;
+  isPasswordInvalid: (password: string) => boolean;
 }
 
-const RegisterContext = createContext<RegisterContextProps | null>(null);
+const RegisterContext = createContext<RegisterContextProps | undefined>(
+  undefined
+);
 
-export const RegisterProvider = ({
-  children,
-}: {
-  children: ReactNode;
-}): React.ReactElement => {
+export const RegisterProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const [hidden, setHidden] = useState<string>("");
+  const [userExists, setUserExists] = useState<boolean>(false);
+  const router = useRouter();
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setUserExists(false);
+
+    const formInvalid = isFormInvalid(name, username, email, password);
+    if (formInvalid) {
+        return;
+    }
+
+    try {
+       
+        const userExists = await userAlreadyExists(username, email);
+        if (userExists) {
+            setUserExists(true);
+            return; 
+        }
+
+        await api.post("/api/v1/auth/register", {
+            name,
+            username,
+            email,
+            password,
+        });
+
+        router.push("/");
+        setName("");
+        setEmail("");
+        setPassword("");
+        setUsername("");
+    } catch (err: any) {
+        console.error("Registration error:", err.message);
+    }
+};
+
+
+  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>): void => {
+    handleKeyDownUtil(e);
   };
 
   const value: RegisterContextProps = {
@@ -42,14 +98,15 @@ export const RegisterProvider = ({
     setUsername,
     password,
     setPassword,
-    hidden,
-    setHidden,
+    userExists,
+    setUserExists,
     handleSubmit,
+    handleKeyDown,
+    isNameInvalid,
+    isUsernameInvalid,
+    isEmailInvalid,
+    isPasswordInvalid,
   };
-
-  const validateForm = (name:string, email:string, username:string, password:string):boolean => {
-    return true
-  }
 
   return (
     <RegisterContext.Provider value={value}>
