@@ -1,7 +1,7 @@
 "use client";
 import React, { ReactElement, useContext } from "react";
-import RegisterContext from "./registerContext";
-import { handleKeyDown } from "./utils/formHandlers";
+import RegisterContext from "../registerContext";
+import { handleKeyDown } from "../utils/formHandlers";
 
 export default function RegisterForm(): ReactElement {
   const context = useContext(RegisterContext);
@@ -25,26 +25,25 @@ export default function RegisterForm(): ReactElement {
     isUsernameInvalid,
     isEmailInvalid,
     isPasswordInvalid,
-    userExists
+    userExists,
   } = context;
 
   return (
-    <main className="flex flex-col items-center justify-center w-4/5 sm:w-6/7 mx-auto min-h-full">
-      <div className="sm:w-full md:w-4/6 lg:w-4/6 mb-40">
+    <main className="flex flex-col items-center justify-center w-4/5 sm:w-6/7 mx-auto h-full ">
+      <div className="sm:w-full md:w-4/6 lg:w-4/6 pb-20 pt-10 px-10 border border-black rounded shadow-lg bg-[#FEFBEA] z-20">
         <form
           className="flex justify-start flex-col items-center max-w-full"
           onSubmit={handleSubmit}
         >
           <label
-            className="text-2xl sm:text-xl mt-4"
+            className="text-2xl sm:text-xl mt-4 pb-2"
             aria-label="Enter your name"
           >
             Name
           </label>
           {isNameInvalid(name) && (
-            <div className="font-quest text-[0.7rem] lg:text-base text-red-400">
-              must provide a valid email ( @gmail.com, @hotmail.com @yahoo.com
-              ...)
+            <div className="font-quest text-[0.7rem]lg:text-base text-red-400">
+              you must only include letters and whitespace (spacebar...) in your name 
             </div>
           )}
           <input
@@ -60,7 +59,7 @@ export default function RegisterForm(): ReactElement {
             onChange={(e) => setName(e.target.value)}
           />
           <label
-            className="text-xl font-quest mt-4"
+            className="text-xl font-quest mt-4 pb-2"
             aria-label="Enter your email"
           >
             Email
@@ -84,7 +83,7 @@ export default function RegisterForm(): ReactElement {
             onChange={(e) => setEmail(e.target.value)}
           />
           <label
-            className="text-xl font-quest mt-4"
+            className="text-xl font-quest mt-4 pb-2"
             aria-label="Choose your username"
           >
             Username
@@ -109,15 +108,15 @@ export default function RegisterForm(): ReactElement {
             onKeyDown={(e) => handleKeyDown(e)}
           />
           <label
-            className="text-xl font-quest mt-4"
+            className="text-xl font-quest mt-4 pb-2"
             aria-label="Choose your password"
           >
             Password
           </label>
           {password.length > 0 && isPasswordInvalid(password) && (
             <div className="font-quest text-[0.7rem] lg:text-base text-red-400">
-              password must include at least one special character e.g "!@#",
-              special character and be at least 8 characters long
+              password must include at least one capital letter, special
+              character e.g "!@#", and be at least 8 characters long
             </div>
           )}
           <input
@@ -137,12 +136,12 @@ export default function RegisterForm(): ReactElement {
           />
           {userExists && (
             <div className="font-quest text-[0.7rem] lg:text-base text-red-400">
-                username or email is already associated with an account
+              username or email is already associated with an account
             </div>
           )}
           <button
             type="submit"
-            className="w-3/5 mt-6 p-2 bg-none outline outline-1 outline-black font-quest text-l rounded"
+            className="w-3/5 mt-20 p-2 bg-none outline outline-1 outline-black font-quest text-l rounded hover:bg-[#FEFBEA] hover:text-zinc-400 hover:outline-zinc-400 transition-all duration-150 ease-in-out"
           >
             Register
           </button>

@@ -8,7 +8,7 @@ export default function Header() {
   const router = useRouter();
 
   return (
-    <header className="flex flex-row justify-between items-center pt-3 pb-2 w-full sticky bg-[#FEFBEA]">
+    <header className="flex flex-row justify-between items-center pt-3 pb-2 w-full sticky bg-[#FEFBEA] z-30">
       <PiPaperPlaneThin
         className="ml-8 mt-2 hover:stroke-white cursor-pointer"
         style={{ strokeWidth: "1", width: "25px", height: "25px" }}

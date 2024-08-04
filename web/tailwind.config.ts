@@ -18,17 +18,17 @@ const config: Config = {
         times: ['"Times New Roman"', "serif"],
       },
       animation: {
-        "loop-scroll": "loop-scroll 1000s linear infinite",
-        "loop-scroll-reverse": "loop-scroll-reverse 1000s linear infinite",
+        "loop-scroll": "loop-scroll 1600s linear infinite",
+        "loop-scroll-two": "loop-scroll-two 1900s linear infinite",
       },
       keyframes: {
         "loop-scroll": {
           from: { transform: "translateX(0)" },
           to: { transform: "translateX(-100%)" },
         },
-        "loop-scroll-reverse": {
+        "loop-scroll-two": {
           from: { transform: "translateX(0)" },
-          to: { transform: "translateX(100%)" },
+          to: { transform: "translateX(-100%)" },
         },
       },
     },
