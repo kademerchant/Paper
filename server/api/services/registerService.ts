@@ -1,6 +1,6 @@
 import validator from "validator";
 import bcrypt from "bcrypt";
-import prisma from "../../prisma/client";
+import prisma from "../../prisma/client"
 
 export const registerUser = async (
   name: string,

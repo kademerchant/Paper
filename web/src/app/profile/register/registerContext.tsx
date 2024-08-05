@@ -74,7 +74,7 @@ export const RegisterProvider: FC<{ children: ReactNode }> = ({ children }) => {
             password,
         });
 
-        router.push("/");
+        router.push("/profile/login");
         setName("");
         setEmail("");
         setPassword("");

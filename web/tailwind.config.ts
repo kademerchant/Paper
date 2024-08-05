@@ -18,8 +18,8 @@ const config: Config = {
         times: ['"Times New Roman"', "serif"],
       },
       animation: {
-        "loop-scroll": "loop-scroll 1600s linear infinite",
-        "loop-scroll-two": "loop-scroll-two 1900s linear infinite",
+        "loop-scroll": "loop-scroll 3500s linear infinite",
+        "loop-scroll-two": "loop-scroll-two 5500s linear infinite",
       },
       keyframes: {
         "loop-scroll": {
@@ -27,8 +27,8 @@ const config: Config = {
           to: { transform: "translateX(-100%)" },
         },
         "loop-scroll-two": {
-          from: { transform: "translateX(0)" },
-          to: { transform: "translateX(-100%)" },
+          from: { transform: "translateX(-90%)" },
+          to: { transform: "translateX(10%)" },
         },
       },
     },

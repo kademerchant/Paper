@@ -4,7 +4,6 @@ import randomLightHex from "@/utils/randomHSL";
 export default function Background(): ReactElement {
   return (
     <>
-      <div className="absolute top-0 left-0 w-screen h-screen z-[11] bg-black opacity-35 md:opacity-[10%]"/>
       <div className="absolute top-50 left-50 w-full z-10">
         <div className="inline-block animate-loop-scroll space-x-8 leading-loose whitespace-nowrap">
           {[...Array(140)].map((_, index) => (
@@ -16,7 +15,7 @@ export default function Background(): ReactElement {
                 textShadow: "4px 4px 0 rgba(0, 0, 0, 0.4)"
               }}
             >
-              Register
+              Login
             </h1>
           ))}
           {[...Array(140)].map((_, index) => (
@@ -28,7 +27,7 @@ export default function Background(): ReactElement {
                 textShadow: "4px 4px 0 rgba(0, 0, 0, 0.4)"
               }}
             >
-              Register
+              Login
             </h1>
           ))}
         </div>
@@ -44,7 +43,7 @@ export default function Background(): ReactElement {
                 textShadow: "4px 4px 0 rgba(0, 0, 0, 0.4)"
               }}
             >
-              Register
+              Login
             </h1>
           ))}
           {[...Array(140)].map((_, index) => (
@@ -56,7 +55,7 @@ export default function Background(): ReactElement {
                 textShadow: "4px 4px 0 rgba(0, 0, 0, 0.4)"
               }}
             >
-              Register
+              Login
             </h1>
           ))}
         </div>
@@ -72,7 +71,7 @@ export default function Background(): ReactElement {
                 textShadow: "4px 4px 0 rgba(0, 0, 0, 0.4)"
               }}
             >
-              Register
+              Login
             </h1>
           ))}
           {[...Array(140)].map((_, index) => (
@@ -84,7 +83,7 @@ export default function Background(): ReactElement {
                 textShadow: "4px 4px 0 rgba(0, 0, 0, 0.4)"
               }}
             >
-              Register
+              Login 
             </h1>
           ))}
         </div>
@@ -100,7 +99,7 @@ export default function Background(): ReactElement {
                 textShadow: "4px 4px 0 rgba(0, 0, 0, 0.4)"
               }}
             >
-              Register
+              Login
             </h1>
           ))}
           {[...Array(140)].map((_, index) => (
@@ -112,7 +111,7 @@ export default function Background(): ReactElement {
                 textShadow: "4px 4px 0 rgba(0, 0, 0, 0.4)"
               }}
             >
-              Register
+              Login
             </h1>
           ))}
         </div>
@@ -128,7 +127,7 @@ export default function Background(): ReactElement {
                 textShadow: "4px 4px 0 rgba(0, 0, 0, 0.4)"
               }}
             >
-              Register
+              Login
             </h1>
           ))}
           {[...Array(140)].map((_, index) => (
@@ -140,7 +139,7 @@ export default function Background(): ReactElement {
                 textShadow: "4px 4px 0 rgba(0, 0, 0, 0.4)"
               }}
             >
-              Register
+              Login
             </h1>
           ))}
         </div>

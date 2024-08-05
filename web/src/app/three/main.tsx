@@ -21,7 +21,7 @@ const ThreeScene: React.FC = () => {
     scene.background = new THREE.Color(0xfefbea);
 
     // Ambient light
-    const ambientLight = new THREE.AmbientLight(0xffffff, 2);
+    const ambientLight = new THREE.AmbientLight(0xffffff, 2.5);
     scene.add(ambientLight);
 
     // Directional lights
@@ -78,7 +78,7 @@ const ThreeScene: React.FC = () => {
 
     for (let i = 0; i < numOfIcosahedrons; i++) {
       detail = Math.floor(Math.random() * 2);
-      colour = randomLightHex(Math.floor(Math.random() * 360), 36, 83);
+      colour = randomLightHex(Math.floor(Math.random() * 360), 36, 85);
       if (detail === 1) {
         detail = 3;
       }
@@ -111,7 +111,7 @@ const ThreeScene: React.FC = () => {
 
     let plane: THREE.Object3D | null = null;
     loader.load(
-      "../../../assets/papigga.glb",
+      "../../../assets/plane.glb",
       function (gltf: any) {
         plane = gltf.scene;
         if (plane) {

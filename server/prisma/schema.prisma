@@ -10,7 +10,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// | Paper models | 7/26 |
+// | models | 4/8 |
 
 model Post {
   id        String    @id @default(uuid())
@@ -22,16 +22,40 @@ model Post {
 }
 
 model User {
-  id         String @id @default(uuid())
-  username   String @unique
-  ciUsername String @unique
-  name       String
-  email      String @unique
-  role       Role   @default(BASIC)
-  password   String
-  posts      Post[]
+  id                 String              @id @default(uuid())
+  username           String              @unique
+  ciUsername         String              @unique
+  name               String
+  email              String              @unique
+  role               Role                @default(BASIC)
+  password           String
+  posts              Post[]
+  sessions           Session[]
+  verificationTokens VerificationToken[]
 
   @@index(email)
+}
+
+model Session {
+  id           String   @id @default(uuid())
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  expiresAt    DateTime
+  sessionToken String   @unique
+  handle       String   @unique
+  userId       String?
+  user         User?    @relation(fields: [userId], references: [id])
+}
+
+model VerificationToken {
+  id        String   @id @default(uuid())
+  token     String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  expiresAt DateTime
+  handle    String   @unique
+  userId    String?
+  user      User?    @relation(fields: [userId], references: [id])
 }
 
 enum Role {

@@ -29,119 +29,127 @@ export default function RegisterForm(): ReactElement {
   } = context;
 
   return (
-    <main className="flex flex-col items-center justify-center w-4/5 sm:w-6/7 mx-auto h-full ">
-      <div className="sm:w-full md:w-4/6 lg:w-4/6 pb-20 pt-10 px-10 border border-black rounded shadow-lg bg-[#FEFBEA] z-20">
+    <main className="flex px-[20px] flex-col items-center justify-center w-full md:w-[850px] mx-auto h-full">
+      <div className="w-full md:w-4/6 lg:w-4/6 pb-8 pt-4 px-10 border border-slate-600 rounded-[5px] shadow-xl bg-[#fcf9e8] z-20">
         <form
           className="flex justify-start flex-col items-center max-w-full"
           onSubmit={handleSubmit}
         >
+          {userExists && (
+            <p className="font-quest text-[0.7rem] lg:text-base text-red-400 mb-4">
+              username or email is already associated with an account
+            </p>
+          )}
           <label
-            className="text-2xl sm:text-xl mt-4 pb-2"
+            className="text-xl sm:text-xl pb-2 block font-quest"
             aria-label="Enter your name"
           >
             Name
           </label>
-          {isNameInvalid(name) && (
-            <div className="font-quest text-[0.7rem]lg:text-base text-red-400">
-              you must only include letters and whitespace (spacebar...) in your name 
-            </div>
-          )}
-          <input
-            className={`focus:outline-black focus:outline-1.5 focus:outline ${
-              isNameInvalid(name)
-                ? "focus:outline-red-400"
-                : "focus:outline-black"
-            }  rounded w-full pl-1 pb-0.5 pt-1 font-quest`}
-            type="text"
-            placeholder=" name..."
-            value={name}
-            required
-            onChange={(e) => setName(e.target.value)}
-          />
+          <div className="w-full relative mb-8">
+            <input
+              className={`focus:outline-black focus:outline-1.5 focus:outline ${
+                isNameInvalid(name)
+                  ? "focus:outline-red-400"
+                  : "focus:outline-black"
+              } rounded w-full pl-1 pb-0.5 pt-1 font-quest`}
+              type="text"
+              placeholder=" name..."
+              value={name}
+              required
+              onChange={(e) => setName(e.target.value)}
+            />
+            {isNameInvalid(name) && (
+              <div className="absolute top-full left-0 font-quest text-[0.7rem] lg:text-base text-red-400 mt-1">
+                you must only include letters and whitespace (spacebar...) in
+                your name
+              </div>
+            )}
+          </div>
           <label
-            className="text-xl font-quest mt-4 pb-2"
+            className="text-xl font-quest mt-4 pb-2 block"
             aria-label="Enter your email"
           >
             Email
           </label>
-          {email.length > 5 && isEmailInvalid(email) && (
-            <div className="font-quest text-[0.7rem] lg:text-base text-red-400">
-              must provide a valid email ( @gmail.com, @hotmail.com @yahoo.com
-              ...)
-            </div>
-          )}
-          <input
-            className={`focus:outline-black focus:outline-1.5 focus:outline ${
-              (email.length > 5 && isEmailInvalid(email)) || userExists
-                ? "focus:outline-red-400"
-                : "focus:outline-black"
-            } rounded w-full pl-1 pb-0.5 pt-1 font-quest`}
-            type="text"
-            placeholder="example@gmail.com"
-            value={email}
-            required
-            onChange={(e) => setEmail(e.target.value)}
-          />
+          <div className="w-full relative mb-8">
+            <input
+              className={`focus:outline-black focus:outline-1.5 focus:outline ${
+                (email.length > 5 && isEmailInvalid(email)) || userExists
+                  ? "focus:outline-red-400"
+                  : "focus:outline-black"
+              } rounded w-full pl-1 pb-0.5 pt-1 font-quest`}
+              type="text"
+              placeholder="example@gmail.com"
+              value={email}
+              required
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            {email.length > 5 && isEmailInvalid(email) && (
+              <div className="absolute top-full left-0 font-quest text-[0.7rem] lg:text-base text-red-400 mt-1">
+                must provide a valid email ( @gmail.com, @hotmail.com @yahoo.com
+                ...)
+              </div>
+            )}
+          </div>
           <label
-            className="text-xl font-quest mt-4 pb-2"
+            className="text-xl font-quest mt-4 pb-2 block"
             aria-label="Choose your username"
           >
             Username
           </label>
-          {isUsernameInvalid(username) && (
-            <div className="font-quest text-[0.7rem] lg:text-base text-red-400">
-              username must only contain letters, numbers and ' _ ', ' - '{" "}
-              <br /> and be between 3 and 32 characters long.
-            </div>
-          )}
-          <input
-            className={`focus:outline-black focus:outline-1.5 focus:outline ${
-              isUsernameInvalid(username) || userExists
-                ? "focus:outline-red-400"
-                : "focus:outline-black"
-            } rounded w-full pl-1 pb-0.5 pt-1 font-quest`}
-            type="text"
-            placeholder="xAlexanderTheGreatx"
-            value={username}
-            required
-            onChange={(e) => setUsername(e.target.value)}
-            onKeyDown={(e) => handleKeyDown(e)}
-          />
+          <div className="w-full relative mb-8">
+            <input
+              className={`focus:outline-black focus:outline-1.5 focus:outline ${
+                isUsernameInvalid(username) || userExists
+                  ? "focus:outline-red-400"
+                  : "focus:outline-black"
+              } rounded w-full pl-1 pb-0.5 pt-1 font-quest`}
+              type="text"
+              placeholder="xAlexanderTheGreatx"
+              value={username}
+              required
+              onChange={(e) => setUsername(e.target.value)}
+              onKeyDown={(e) => handleKeyDown(e)}
+            />
+            {isUsernameInvalid(username) && (
+              <div className="absolute top-full left-0 font-quest text-[0.7rem] lg:text-base text-red-400 mt-1">
+                only use letters, numbers and _ - and less than 32 chars
+              </div>
+            )}
+          </div>
           <label
-            className="text-xl font-quest mt-4 pb-2"
+            className="text-xl font-quest mt-4 pb-2 block"
             aria-label="Choose your password"
           >
             Password
           </label>
-          {password.length > 0 && isPasswordInvalid(password) && (
-            <div className="font-quest text-[0.7rem] lg:text-base text-red-400">
-              password must include at least one capital letter, special
-              character e.g "!@#", and be at least 8 characters long
-            </div>
-          )}
-          <input
-            className={`focus:outline-black focus:outline-1.5 focus:outline ${
-              password.length > 0 && isPasswordInvalid(password)
-                ? "focus:outline-red-400"
-                : "focus:outline-black"
-            } rounded w-full pl-1 pb-0.5 pt-1 font-quest`}
-            type="password"
-            placeholder="********"
-            value={password}
-            required
-            onChange={(e) => {
-              setPassword(e.target.value);
-            }}
-            onKeyDown={(e) => handleKeyDown(e)}
-          />
-          {userExists && (
-            <div className="font-quest text-[0.7rem] lg:text-base text-red-400">
-              username or email is already associated with an account
-            </div>
-          )}
+          <div className="w-full relative">
+            <input
+              className={`focus:outline-black focus:outline-1.5 focus:outline ${
+                password.length > 0 && isPasswordInvalid(password)
+                  ? "focus:outline-red-400"
+                  : "focus:outline-black"
+              } rounded w-full pl-1 pb-0.5 pt-1 font-quest`}
+              type="password"
+              placeholder="********"
+              value={password}
+              required
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
+              onKeyDown={(e) => handleKeyDown(e)}
+            />
+            {password.length > 0 && isPasswordInvalid(password) && (
+              <div className="absolute top-full left-0 font-quest text-xs md:text-sm text-red-400 mt-1">
+                A-Z, at least 1 special char and at least one capital
+              </div>
+            )}
+          </div>
+
           <button
             type="submit"
-            className="w-3/5 mt-20 p-2 bg-none outline outline-1 outline-black font-quest text-l rounded hover:bg-[#FEFBEA] hover:text-zinc-400 hover:outline-zinc-400 transition-all duration-150 ease-in-out"
+            className="w-3/6 mt-10 p-2 bg-[#e8a2af] text-white border-solid border-[1px] outline outline-1 font-quest text-l rounded hover:bg-[#FEFBEA] hover:text-zinc-400 hover:outline-zinc-400 transition-all duration-150 ease-in-out"
           >
             Register
           </button>

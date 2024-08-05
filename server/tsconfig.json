@@ -7,7 +7,7 @@
     "esModuleInterop": true,
     "baseUrl": ".", // Added baseUrl to resolve paths
     "paths": {
-      "#/*": ["*"] // Added path mapping for '@' to root
+      "#/prisma": ["./prisma/*"]
     }
   }
 }
