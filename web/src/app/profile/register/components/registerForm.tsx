@@ -61,8 +61,7 @@ export default function RegisterForm(): ReactElement {
             />
             {isNameInvalid(name) && (
               <div className="absolute top-full left-0 font-quest text-[0.7rem] lg:text-base text-red-400 mt-1">
-                you must only include letters and whitespace (spacebar...) in
-                your name
+                A-Z and whitespace only 
               </div>
             )}
           </div>
@@ -87,8 +86,7 @@ export default function RegisterForm(): ReactElement {
             />
             {email.length > 5 && isEmailInvalid(email) && (
               <div className="absolute top-full left-0 font-quest text-[0.7rem] lg:text-base text-red-400 mt-1">
-                must provide a valid email ( @gmail.com, @hotmail.com @yahoo.com
-                ...)
+                must provide a valid email
               </div>
             )}
           </div>
@@ -114,7 +112,7 @@ export default function RegisterForm(): ReactElement {
             />
             {isUsernameInvalid(username) && (
               <div className="absolute top-full left-0 font-quest text-[0.7rem] lg:text-base text-red-400 mt-1">
-                only use letters, numbers and _ - and less than 32 chars
+                A-Z, '-' '_' and numbers only
               </div>
             )}
           </div>
@@ -142,14 +140,14 @@ export default function RegisterForm(): ReactElement {
             />
             {password.length > 0 && isPasswordInvalid(password) && (
               <div className="absolute top-full left-0 font-quest text-xs md:text-sm text-red-400 mt-1">
-                A-Z, at least 1 special char and at least one capital
+                A-Z, at least 1 special char and at least 1 capital
               </div>
             )}
           </div>
 
           <button
             type="submit"
-            className="w-3/6 mt-10 p-2 bg-[#e8a2af] text-white border-solid border-[1px] outline outline-1 font-quest text-l rounded hover:bg-[#FEFBEA] hover:text-zinc-400 hover:outline-zinc-400 transition-all duration-150 ease-in-out"
+            className="w-3/6 mt-10 p-2 bg-[#e79ca9] text-white border-solid border-[1px] outline outline-1 font-quest text-l rounded hover:bg-[#FEFBEA] hover:text-zinc-400 hover:outline-zinc-400 transition-all duration-150 ease-in-out"
           >
             Register
           </button>
