@@ -14,3 +14,9 @@
   font-style: italic;
 }
 
+.menu-bar {
+  transition: stroke 0.3s ease-in-out;
+}
+.menu-button:hover .menu-bar {
+  stroke: #fcf4c7;
+}

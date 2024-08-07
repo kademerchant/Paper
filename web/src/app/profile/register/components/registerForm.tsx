@@ -44,7 +44,7 @@ export default function RegisterForm(): ReactElement {
             className="text-xl sm:text-xl pb-2 block font-quest"
             aria-label="Enter your name"
           >
-            Name
+            name
           </label>
           <div className="w-full relative mb-8">
             <input
@@ -69,7 +69,7 @@ export default function RegisterForm(): ReactElement {
             className="text-xl font-quest mt-4 pb-2 block"
             aria-label="Enter your email"
           >
-            Email
+            email
           </label>
           <div className="w-full relative mb-8">
             <input
@@ -94,7 +94,7 @@ export default function RegisterForm(): ReactElement {
             className="text-xl font-quest mt-4 pb-2 block"
             aria-label="Choose your username"
           >
-            Username
+            username
           </label>
           <div className="w-full relative mb-8">
             <input
@@ -120,7 +120,7 @@ export default function RegisterForm(): ReactElement {
             className="text-xl font-quest mt-4 pb-2 block"
             aria-label="Choose your password"
           >
-            Password
+            password
           </label>
           <div className="w-full relative">
             <input
@@ -130,7 +130,7 @@ export default function RegisterForm(): ReactElement {
                   : "focus:outline-black"
               } rounded w-full pl-1 pb-0.5 pt-1 font-quest`}
               type="password"
-              placeholder="********"
+              placeholder="Password!"
               value={password}
               required
               onChange={(e) => {
@@ -149,7 +149,7 @@ export default function RegisterForm(): ReactElement {
             type="submit"
             className="w-3/6 mt-10 p-2 bg-[#e79ca9] text-white border-solid border-[1px] outline outline-1 font-quest text-l rounded hover:bg-[#FEFBEA] hover:text-zinc-400 hover:outline-zinc-400 transition-all duration-150 ease-in-out"
           >
-            Register
+            register
           </button>
         </form>
       </div>

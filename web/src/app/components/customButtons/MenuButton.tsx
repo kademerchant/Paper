@@ -4,35 +4,36 @@ interface MenuButtonProps {
 
 const MenuButton: React.FC<MenuButtonProps> = ({ className }) => {
   return (
-    <svg viewBox="0 0 100 100" width="40px" height="40px" className={className}>
-        <line
-          x1="15"
-          x2="95"
-          y1="25"
-          y2="25"
-          stroke="#98978B"
-          strokeWidth="10"
-          strokeLinecap="round"
-        ></line>
-        <line
-          x1="15"
-          x2="95"
-          y1="55"
-          y2="55"
-          stroke="#98978B"
-          strokeWidth="10"
-          strokeLinecap="round"
-        ></line>
-        <line
-          x1="15"
-          x2="95"
-          y1="85"
-          y2="85"
-          stroke="#98978B"
-          strokeWidth="10"
-          strokeLinecap="round"
-        ></line>
+    <svg viewBox="0 0 100 100" className={className}>
       <line
+        x1="15"
+        x2="95"
+        y1="25"
+        y2="25"
+        stroke="#98978B"
+        strokeWidth="10"
+        strokeLinecap="round"
+      ></line>
+      <line
+        x1="15"
+        x2="95"
+        y1="55"
+        y2="55"
+        stroke="#98978B"
+        strokeWidth="10"
+        strokeLinecap="round"
+      ></line>
+      <line
+        x1="15"
+        x2="95"
+        y1="85"
+        y2="85"
+        stroke="#98978B"
+        strokeWidth="10"
+        strokeLinecap="round"
+      ></line>
+      <line
+        className="menu-bar"
         x1="10"
         x2="90"
         y1="20"
@@ -40,9 +41,9 @@ const MenuButton: React.FC<MenuButtonProps> = ({ className }) => {
         stroke="#acd1d8"
         strokeWidth="10"
         strokeLinecap="round"
-      >
-      </line>
+      ></line>
       <line
+        className="menu-bar"
         x1="10"
         x2="90"
         y1="50"
@@ -52,6 +53,7 @@ const MenuButton: React.FC<MenuButtonProps> = ({ className }) => {
         strokeLinecap="round"
       ></line>
       <line
+        className="menu-bar"
         x1="10"
         x2="90"
         y1="80"

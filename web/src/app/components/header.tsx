@@ -1,7 +1,6 @@
 "use client";
 
-import { PiBookThin } from "react-icons/pi";
-import MenuButton from "./customButtons/MenuButton";
+import MenuButton from "./customButtons/menuButton";
 import { useRouter } from "next/navigation";
 import randomLightHex from "@/utils/randomHSL";
 
@@ -11,7 +10,7 @@ export default function Header() {
   return (
     <header className="flex flex-row justify-between items-center pt-3 pb-4 w-full sticky bg-[#fefbe7] border-solid border-black border-b-[1px] z-30 shadow-sm">
       <img
-        className="ml-8 mt-2 cursor-pointer md:w-[45px] md:h-[45px] w-[25px] h-[25px]"
+        className=" mt-0  ml-8 md:mt-2 cursor-pointer md:w-[45px] md:h-[45px] w-[25px] h-[25px]"
         aria-label="to homepage"
         src="/assets/PAPERLOGO.png"
         onClick={() => {
@@ -61,7 +60,7 @@ export default function Header() {
         </h1>
       </div>
       <div className="mr-8 mt-2 cursor-pointer">
-        <MenuButton />
+        <MenuButton className="menu-button pb-2 md:pb-0 w-[30px] h-[30px] md:h-[40px] md:w-[40px] " />
       </div>
     </header>
   );
