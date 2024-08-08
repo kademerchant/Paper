@@ -11,8 +11,6 @@
 - To develop a social media platform focused on sharing and showcasing art.
 
 ### Currently implementing:
-- **Auth**
-  - Registration ✅
-  - Security ✅
-  - Login
-  - Profile page (including customization)
+- profile page
+- post page
+- chat functionality
