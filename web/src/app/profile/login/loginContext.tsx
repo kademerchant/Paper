@@ -1,9 +1,8 @@
 "use client";
 import { createContext, useState, ReactNode, FC } from "react";
-import { useSession, signIn } from "next-auth/react";
-import api from "../../../../axios/axios";
 import { useRouter } from "next/navigation";
-import { isFormInvalid } from "./utils/validation"
+import { isFormInvalid } from "./utils/validate";
+import { login } from "./utils/login";
 
 interface LoginContextProps {
   username: string;
@@ -16,28 +15,34 @@ interface LoginContextProps {
 const LoginContext = createContext<LoginContextProps | undefined>(undefined);
 
 export const LoginProvider: FC<{ children: ReactNode }> = ({ children }) => {
-  const { data: session, status } = useSession();
   const router = useRouter();
 
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
 
-  const handleSignIn = async () => {
-    const result = await signIn("credentials", {
-      redirect: false,
-      username,
-      password,
-    });
+  const handleSignIn = async (): Promise<boolean> => {
+    try {
+      const id = await isFormInvalid(username, password);
 
-    if (result?.error) {
+      if (!id) {
+        return false;
+      }
+      const token = await login(id);
+      if (!token) {
+        return false;
+      }
+
+      localStorage.setItem("jwtToken", token);
+      console.log(" Succesfully signed in ");
+      router.push("/");
+      return true;
+    } catch (err: any) {
       console.log(
-        "ERROR: encountered an error while trying to sign in -",
-        result.error
+        "Error while handling sign in ( occurred in loginContext / loginForm",
+        err
       );
       return false;
     }
-    console.log("Successfully signed in");
-    return true;
   };
 
   const value: LoginContextProps = {
@@ -46,7 +51,6 @@ export const LoginProvider: FC<{ children: ReactNode }> = ({ children }) => {
     password,
     setPassword,
     handleSignIn,
-    isFormInvalid, 
   };
 
   return (

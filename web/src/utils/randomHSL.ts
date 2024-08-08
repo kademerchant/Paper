@@ -6,6 +6,6 @@ export default function randomLightHex(hue: number, sat:number, light:number):st
       const color = light - a * Math.max(Math.min(k - 3, 9 - k, 1), -1);
       return Math.round(255 * color).toString(16).padEnd(2, '0');
     };
-    console.log( `#${format(0)}${format(8)}${format(4)}`.toUpperCase())
+    
     return `#${format(0)}${format(8)}${format(4)}`;
   }

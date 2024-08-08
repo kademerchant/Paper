@@ -82,7 +82,7 @@ const ThreeScene: React.FC = () => {
       if (detail === 1) {
         detail = 3;
       }
-      console.log(colour);
+      
 
       icosahedronGeometry = new THREE.IcosahedronGeometry(1, detail);
       icosahedronMaterial = new THREE.MeshStandardMaterial({

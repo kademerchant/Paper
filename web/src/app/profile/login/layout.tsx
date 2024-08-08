@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-
+import { LoginProvider } from "./loginContext";
 
 export const metadata: Metadata = {
   title: "Paper | Login",
@@ -12,6 +12,8 @@ export default function AboutLayout({
   children: React.ReactNode;
 }) {
   return (
+    <LoginProvider>
       <section className="w-full h-full mx-auto">{children}</section>
+    </LoginProvider>
   );
 }

@@ -30,32 +30,8 @@ model User {
   role               Role                @default(BASIC)
   password           String
   posts              Post[]
-  sessions           Session[]
-  verificationTokens VerificationToken[]
 
   @@index(email)
-}
-
-model Session {
-  id           String   @id @default(uuid())
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
-  expiresAt    DateTime
-  sessionToken String   @unique
-  handle       String   @unique
-  userId       String?
-  user         User?    @relation(fields: [userId], references: [id])
-}
-
-model VerificationToken {
-  id        String   @id @default(uuid())
-  token     String   @unique
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  expiresAt DateTime
-  handle    String   @unique
-  userId    String?
-  user      User?    @relation(fields: [userId], references: [id])
 }
 
 enum Role {

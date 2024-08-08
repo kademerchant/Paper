@@ -4,5 +4,6 @@ dotenv.config();
 
 export const config = {
   PORT: process.env.PORT,
-  NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET
+  SECRET_KEY: process.env.SECRET_KEY,
+  NODE_ENV: process.env.NODE_ENV
 };
